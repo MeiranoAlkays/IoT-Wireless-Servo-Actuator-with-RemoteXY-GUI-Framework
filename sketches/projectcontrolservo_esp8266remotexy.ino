@@ -4,10 +4,13 @@
 // RemoteXY select connection mode and include library 
 #define REMOTEXY_MODE__WIFI_POINT
 #include <ESP8266WiFi.h> 
+
+// CRITICAL SECURITY NOTE: Remember to change placeholders before public GitHub pushes!
 #define REMOTEXY_WIFI_SSID "YOUR_WIFI_SSID" //e.g. RA
 #define REMOTEXY_WIFI_PASSWORD "YOUR_WIFI_PASSWORD" //e.g. pesendulu123
 #define REMOTEXY_SERVER_PORT 6377
 #include <RemoteXY.h>
+
 #pragma pack(push, 1)  
 uint8_t RemoteXY_CONF[] =   // 82 bytes
   { 255,4,0,0,0,75,0,19,0,0,0,82,79,66,79,84,95,82,69,77,
@@ -17,40 +20,55 @@ uint8_t RemoteXY_CONF[] =   // 82 bytes
   2,26 };
   
 struct {
-
-    // input variables
+  // input variables
   int8_t slider_01; // from 0 to 100
   int8_t slider_02; // from 0 to 100
   int8_t slider_03; // from 0 to 100
   int8_t slider_04; // from 0 to 100
 
-    // other variable
+  // other variable
   uint8_t connect_flag;  // =1 if wire connected, else =0
-
 } RemoteXY;   
 #pragma pack(pop)
+
 #include <Servo.h> 
 Servo myservo;
-int servoPin = D1;
+
+// FIXED: Changed D1 to the absolute GPIO number (GPIO 5 corresponds to D1 on NodeMCU)
+const int servoPin = 5; 
+
 #define SERVOMIN  500
 #define SERVOMAX  2500
+
 int pos = 0;
 int pulse = 0;      
 
 void setup() 
 {
-RemoteXY_Init (); 
-myservo.attach(servoPin);
-RemoteXY.slider_01 = 50;
+  // FIXED: Initialized Serial communication protocol for logging parameters
+  Serial.begin(115200); 
+  
+  RemoteXY_Init(); 
+  myservo.attach(servoPin);
+  
+  // Set default initial midpoint position for safety under load
+  RemoteXY.slider_01 = 50;
 }
 
 void loop() 
 { 
-  RemoteXY_Handler ();
-int ms = RemoteXY.slider_01;   
-pos = map(ms, 0, 100, 0, 180); 
-pulse = map(pos, 0, 180, SERVOMIN, SERVOMAX);
-Serial.println(pulse);
-myservo.writeMicroseconds(pulse);    
-
+  RemoteXY_Handler();
+  
+  int ms = RemoteXY.slider_01;   
+  pos = map(ms, 0, 100, 0, 180); 
+  pulse = map(pos, 0, 180, SERVOMIN, SERVOMAX);
+  
+  // Clean real-time telemetry output to serial monitor
+  Serial.print("Servo Pulse Output: ");
+  Serial.println(pulse);
+  
+  myservo.writeMicroseconds(pulse);    
+  
+  // Small delay to prevent crashing the ESP8266 watchdog timer
+  delay(10); 
 }
