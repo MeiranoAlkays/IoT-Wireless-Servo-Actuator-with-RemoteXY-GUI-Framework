@@ -44,7 +44,7 @@ int pulse = 0;
 
 void setup() 
 {
-  // FIXED: Initialized Serial communication protocol for logging parameters
+  // Initialized Serial communication protocol for logging parameters
   Serial.begin(115200); 
   
   RemoteXY_Init(); 
