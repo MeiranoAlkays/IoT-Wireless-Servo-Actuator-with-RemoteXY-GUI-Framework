@@ -1,5 +1,13 @@
-# Object file
+# Arduino IDE Temporary Build Files
+build/
+bin/
+🔥*~
+
+# Compiled Binaries
+*.elf
+*.hex
 *.o
 
-# Ada Library Information
-*.ali
+# OS Specific junk files
+Thumbs.db
+.DS_Store
