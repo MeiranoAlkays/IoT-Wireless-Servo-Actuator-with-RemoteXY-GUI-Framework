@@ -4,8 +4,8 @@
 // RemoteXY select connection mode and include library 
 #define REMOTEXY_MODE__WIFI_POINT
 #include <ESP8266WiFi.h> 
-#define REMOTEXY_WIFI_SSID "Gatut W"
-#define REMOTEXY_WIFI_PASSWORD "ayahganteng27"
+#define REMOTEXY_WIFI_SSID "YOUR_WIFI_SSID" //e.g. RA
+#define REMOTEXY_WIFI_PASSWORD "YOUR_WIFI_PASSWORD" //e.g. pesendulu123
 #define REMOTEXY_SERVER_PORT 6377
 #include <RemoteXY.h>
 #pragma pack(push, 1)  
