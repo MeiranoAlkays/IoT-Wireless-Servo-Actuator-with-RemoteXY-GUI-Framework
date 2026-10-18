@@ -5,7 +5,6 @@
 #define REMOTEXY_MODE__WIFI_POINT
 #include <ESP8266WiFi.h> 
 
-// CRITICAL SECURITY NOTE: Remember to change placeholders before public GitHub pushes!
 #define REMOTEXY_WIFI_SSID "YOUR_WIFI_SSID" //e.g. RA
 #define REMOTEXY_WIFI_PASSWORD "YOUR_WIFI_PASSWORD" //e.g. pesendulu123
 #define REMOTEXY_SERVER_PORT 6377
