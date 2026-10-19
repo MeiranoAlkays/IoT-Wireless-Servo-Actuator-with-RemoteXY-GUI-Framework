@@ -24,8 +24,8 @@ To counter voltage sags and electromagnetic interference (EMI) generated under h
 ```text
 📁 iot-robotic-arm/
 ├── 📁 sketches/         --> Pure C++/Arduino firmware configuration code (.ino)
-├── 📁 schematics/       --> Hand-drawn wiring schematics and hardware architecture 
-├── 📁 assets/           --> 3D assembly print logs, project photos, and video demos
+├── 📁 schematics/       --> Hand-drawn wiring schematics and hardware architecture #On-Going
+├── 📁 assets/           --> 3D assembly print logs, project photos, and video demos #On-Going
 └── 📄 .gitignore        --> Native Arduino IDE temporary build filter file
 ```
 
